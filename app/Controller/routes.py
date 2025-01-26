@@ -87,3 +87,14 @@ def about():
     return render_template('about.html', 
                          title='About Smile Portal',
                          description='A social media platform for sharing positive moments')
+
+
+@bp_routes.route('/contact', methods=['GET', 'POST'])
+def contact():
+    return render_template('contact.html', title='Contact Us')
+
+# for testing the 500 error page
+# @bp_routes.route('/testerror', methods=['GET'])
+# def test_500():
+#     # Force a 500 error
+#     return render_template('500error.html')
