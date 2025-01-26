@@ -80,3 +80,10 @@ def delete_post(post_id):
         db.session.commit()
         flash('Post successfully deleted')
     return redirect(url_for('routes.index'))
+
+
+@bp_routes.route('/about', methods=['GET'])
+def about():
+    return render_template('about.html', 
+                         title='About Smile Portal',
+                         description='A social media platform for sharing positive moments')
