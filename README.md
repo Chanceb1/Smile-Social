@@ -1,4 +1,4 @@
-# Smile Portal - Social Media Web Application
+# Smile Social - Social Media Web Application
 A full-stack social media web application built with Python and Flask that allows users to share and interact with positive moments and stories.
 
 ## Features

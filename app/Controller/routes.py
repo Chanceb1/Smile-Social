@@ -40,7 +40,7 @@ def index():
             elif (int(sortPosts.sort.data) == 1):
                 posts = Post.query.order_by(Post.happiness_level.desc())
 
-    return render_template('index.html', title="Smile Portal", posts=posts, form=sortPosts)
+    return render_template('index.html', title="Smile Social", posts=posts, form=sortPosts)
 
 @bp_routes.route('/postsmile', methods=['GET', 'POST'])
 @login_required
@@ -85,7 +85,7 @@ def delete_post(post_id):
 @bp_routes.route('/about', methods=['GET'])
 def about():
     return render_template('about.html', 
-                         title='About Smile Portal',
+                         title='About Smile Social',
                          description='A social media platform for sharing positive moments')
 
 

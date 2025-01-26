@@ -123,7 +123,7 @@ def test_login_logout(request,test_client,init_database):
                           data=dict(username='sakire', password='1234',remember_me=False),
                           follow_redirects = True)
     assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your index page. 
+    assert b"Welcome to Smile Social!" in response.data  #You may update the assertion condition according to the content of your index page. 
 
     response = test_client.get('/logout',                       
                           follow_redirects = True)
@@ -142,7 +142,7 @@ def test_postSmile(test_client,init_database):
                         data=dict(username='sakire', password='1234',remember_me=False),
                         follow_redirects = True)
     assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
+    assert b"Welcome to Smile Social!" in response.data  #You may update the assertion condition according to the content of your  page.
     
     #test the "PostSmile" form 
     response = test_client.get('/postsmile')
@@ -156,7 +156,7 @@ def test_postSmile(test_client,init_database):
                           data=dict(title='My test post', body='This is my first test post.',happiness_level=2, tag = tags1),
                           follow_redirects = True)
     assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data   #You may update the assertion condition according to the content of your  page.
+    assert b"Welcome to Smile Social!" in response.data   #You may update the assertion condition according to the content of your  page.
     assert b"My test post" in response.data 
     assert b"This is my first test post." in response.data 
 
@@ -171,7 +171,7 @@ def test_postSmile(test_client,init_database):
                           data=dict(title='Second post', body='Here is another post.',happiness_level=1, tag = tags2),
                           follow_redirects = True)
     assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
+    assert b"Welcome to Smile Social!" in response.data  #You may update the assertion condition according to the content of your  page.
     assert b"Second post" in response.data 
     assert b"Here is another post." in response.data 
 
@@ -199,7 +199,7 @@ def test_likeSmile(test_client,init_database):
                         data=dict(username='sakire', password='1234',remember_me=False),
                         follow_redirects = True)
     assert response.status_code == 200
-    assert b"Welcome to Smile Portal!" in response.data  #You may update the assertion condition according to the content of your  page.
+    assert b"Welcome to Smile Social!" in response.data  #You may update the assertion condition according to the content of your  page.
     
     #first post two smile stories
     response = test_client.get('/postsmile')
@@ -229,7 +229,7 @@ def test_likeSmile(test_client,init_database):
                           follow_redirects = True)
     assert response.status_code == 200
     #The page should be redirected to the main page
-    assert b"Welcome to Smile Portal!" in response.data   #You may update the assertion condition according to the content of your  page.
+    assert b"Welcome to Smile Social!" in response.data   #You may update the assertion condition according to the content of your  page.
     #check whether the likecount was updated successfully
     c3 = db.session.query(Post).filter(Post.id ==c1.first().id)
     assert c3.first().likes == 0 

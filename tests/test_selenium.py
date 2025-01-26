@@ -126,7 +126,7 @@ def test_login_form(browser,user2):
     sleep(5)
     #verification
     content = browser.page_source
-    assert 'Welcome to Smile Portal!' in content
+    assert 'Welcome to Smile Social!' in content
     assert user2['username'] in content
 
 def test_invalidlogin(browser,user2):

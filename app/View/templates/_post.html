@@ -1,65 +1,62 @@
-<table class = "posttable" style = "width:100%" valign="top">
-        <tr> 
-            <td colspan="3"><div class="posttitle"> {{post.title}} </div>
-            </td>
-        </tr>
-        <tr>
-            <td width="10%" >
-                
-                {% if post.happiness_level == 1 %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}", width="40px">
-                {% elif post.happiness_level == 2 %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-2.png' )}}", width="40px">
-                {% else %}
-                    <img src="{{ url_for('static', filename = 'img//happiness-level-3.png' )}}", width="40px">
-                {% endif %}
+<table class="table table-borderless mb-0">
+    <tr>
+        <td colspan="3">
+            <h5 class="fw-bold mb-2">{{post.title}}</h5>
+        </td>
+    </tr>
+    <tr>
+        <td width="10%" class="text-center">
+            {% if post.happiness_level == 1 %}
+                <img src="{{ url_for('static', filename='img/happiness-level-1.png') }}" class="img-fluid" width="60">
+            {% elif post.happiness_level == 2 %}
+                <img src="{{ url_for('static', filename='img/happiness-level-2.png') }}" class="img-fluid" width="60">
+            {% else %}
+                <img src="{{ url_for('static', filename='img/happiness-level-3.png') }}" class="img-fluid" width="60">
+            {% endif %}
+        </td>
 
-            </td>
+        <td width="80%">
+            <div class="mb-2">{{ post.body }}</div>
+            <small class="text-muted">
+                <i class="bi bi-clock me-1"></i>
+                {{ moment(post.timestamp).format('LLL') }}
+            </small>
+        </td>
 
-            <td width="80%" >
-                <div class="postmessage">
-                {{ post.body }} 
-                  
-               </div>
-               <div class ="posttimestamp"> 
-                
-                Posted at: {{ moment(post.timestamp).format('LLL') }}
-               </div> 
-            </td> 
-
-            <td width = "5%"> 
-                <div class ="likecount">
-                    
-                    <form action="{{url_for('routes.like', post_id=post.id)}}" method="post">
-                    <input type="submit" value="" class ="likebtn">
-                    </form>                  
-                    <br>
-                    <p>{{ post.likes }} </p>
-                    
-                </div>
-                <br> 
-                {% if post.writer == current_user %}
-                <form action="{{url_for('routes.delete_post', post_id=post.id)}}" method="post">
-                    <input class="button" type="submit" value="Delete" >
+        <td width="5%" class="text-center">
+            <div class="mb-2">
+                <form action="{{url_for('routes.like', post_id=post.id)}}" method="post">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-heart-fill"></i>
+                    </button>
                 </form>
-                {% endif %}
-            </td>
-        </tr>
-        
-        <tr> 
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
-                {% for t in post.get_tags().all() %}
-                    <span class="tagitem">{{ t.name }}</span>
-                {% endfor %}
-            </td>
-        </tr>
+                <small class="text-muted mt-1 d-block">{{ post.likes }}</small>
+            </div>
+            
+            {% if post.writer == current_user %}
+            <form action="{{url_for('routes.delete_post', post_id=post.id)}}" method="post">
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    
+    <tr>
+        <td colspan="3" class="text-center">
+            {% for t in post.get_tags().all() %}
+                <span class="badge bg-primary me-1">{{ t.name }}</span>
+            {% endfor %}
+        </td>
+    </tr>
 
-        <tr>
-            <td colspan="3" style = "text-align:center" valign="bottom">  
-                <br>
-                <span>Posted By:</span><span class='useritem'>{{ post.writer.username }}</span>
-              </td>
-            </tr>
-        </tr>
-    </table>
+    <tr>
+        <td colspan="3" class="text-center">
+            <small class="text-muted">
+                <i class="bi bi-person-circle me-1"></i>
+                Posted by: <span class="fw-bold">{{ post.writer.username }}</span>
+            </small>
+        </td>
+    </tr>
+</table>

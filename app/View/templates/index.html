@@ -1,33 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-    <!-- <h1>Welcome to Smile Portal!</h1> -->
-    
-    <h2>Number of smiles:  {{posts.count()}}</h2>
-    <!--  posts|length  -->
-
-
-    {% if form %}
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-            <div>                   
-                {{ form.sort.label }}
-                {{ form.sort(class="formselect") }}
-
-                {{ form.my_posts.label }}
-                {{ form.my_posts(class='rem_me') }}
-
-                {{ form.submit(class="button")}}
+<div class="container py-4">
+    <!-- Header Section -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="bi bi-emoji-smile me-2"></i>
+                        Total Smiles: {{posts.count()}}
+                    </h3>
+                </div>
             </div>
-        </form>
-    {% endif %}
-
-
-    <div class="postlist">
-        {% for post in posts.all() %}
-            <div class="post-box"> {% include '_post.html' %} </div>
-        {% endfor %}
+        </div>
     </div>
 
+    <!-- Filter Form -->
+    {% if form %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form action="" method="post" class="row align-items-end g-3">
+                {{ form.hidden_tag() }}
+                <div class="col-md-4">
+                    <label class="form-label text-primary mb-2">
+                        <i class="bi bi-sort-down me-2"></i>
+                        <span class="fw-bold">Sort by</span>
+                    </label>
+                    {{ form.sort(class="form-select") }}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-check">
+                        {{ form.my_posts(class="form-check-input") }}
+                        {{ form.my_posts.label(class="form-check-label") }}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Posts Grid -->
+    <div class="post-container">
+        {% for post in posts.all() %}
+        <div class="card shadow-sm h-100">
+            {% include '_post.html' %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
