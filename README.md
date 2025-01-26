@@ -44,6 +44,16 @@ A full-stack social media web application built with Python and Flask that allow
 
 ## Project Structure
 
+This application follows the Model-View-Controller (MVC) architectural pattern:
+
+**Architecture Overview**
+
+* **Model**: Handles data logic and database interactions
+* **View**: Manages presentation and user interface
+* **Controller**: Coordinates between Model and View, handles business logic
+
+Each component is separated for better maintainability, testability, and scalability.
+
 ------------------------
 ## Install and Run
 -----------------------
