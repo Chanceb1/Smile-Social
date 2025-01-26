@@ -31,8 +31,8 @@ A full-stack social media web application built with Python and Flask that allow
 ## Screenshots
 | Feature | Screenshot |
 |---------|------------|
-| Homepage/Feed | ![Homepage showing post feed](/imgs/homepage.png) |
-| Create Post | ![Create new post form](/imgs/createPost.png) |
+| Homepage/Feed | ![Homepage showing post feed](/imgs/SmileHome.png) |
+| Create Post | ![Create new post form](/imgs/SmilePost.png) |
 
 ## Technology Stack
 - **Backend**: Python, Flask
