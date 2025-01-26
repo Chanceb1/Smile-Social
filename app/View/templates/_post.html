@@ -1,0 +1,68 @@
+<table class = "posttable" style = "width:100%" valign="top">
+        <tr> 
+            <td colspan="3"><div class="posttitle"> {{post.title}} </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" >
+                
+                {% if post.happiness_level == 1 %}
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-1.png' )}}", width="40px">
+                {% elif post.happiness_level == 2 %}
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-2.png' )}}", width="40px">
+                {% else %}
+                    <img src="{{ url_for('static', filename = 'img//happiness-level-3.png' )}}", width="40px">
+                {% endif %}
+
+            </td>
+
+            <td width="80%" >
+                <div class="postmessage">
+                {{ post.body }} 
+                  
+               </div>
+               <div class ="posttimestamp"> 
+                
+                Posted at: {{ moment(post.timestamp).format('LLL') }}
+               </div> 
+            </td> 
+
+            <td width = "5%"> 
+                <div class ="likecount">
+                    
+                    <form action="{{url_for('routes.like', post_id=post.id)}}" method="post">
+                    <input type="submit" value="" class ="likebtn">
+                    </form>                  
+                    <br>
+                    <p>{{ post.likes }} </p>
+                    
+                </div>
+                <br> 
+                 <!-- (milestone3) TODO: if the post is posted by the logged in user, include the "delete" button.  
+                                   Define an HTML `post` form with a submit button. The form action should redirect to `routes.deletepost` route.
+                                   Style the submit button using `button` CCS class selector. -->
+                {% if post.writer == current_user %}
+                <form action="{{url_for('routes.delete_post', post_id=post.id)}}" method="post">
+                    <input class="button" type="submit" value="Delete" >
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        
+        <tr> 
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                {% for t in post.get_tags().all() %}
+                    <span class="tagitem">{{ t.name }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3" style = "text-align:center" valign="bottom">  
+                <br>
+                <span>Posted By:</span><span class='useritem'>{{ post.writer.username }}</span>
+              </td>
+            </tr>
+        </tr>
+    </table>

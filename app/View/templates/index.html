@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- <h1>Welcome to Smile Portal!</h1> -->
+    
+    <h2>Number of smiles:  {{posts.count()}}</h2>
+    <!--  posts|length  -->
+
+
+    {% if form %}
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>                   
+                {{ form.sort.label }}
+                {{ form.sort(class="formselect") }}
+
+                {{ form.my_posts.label }}
+                {{ form.my_posts(class='rem_me') }}
+
+                {{ form.submit(class="button")}}
+            </div>
+        </form>
+    {% endif %}
+
+
+    <div class="postlist">
+        {% for post in posts.all() %}
+            <div class="post-box"> {% include '_post.html' %} </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

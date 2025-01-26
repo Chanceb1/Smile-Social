@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Post New Smile</h1>
+
+    {% if form %}
+        <form action="" method="post">
+            {{ form.hidden_tag() }}
+            <div>
+                
+                <p>{{ form.title.label }}</p>
+                {{ form.title(class="formtitle") }}
+                
+                {% for error in form.title.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+                  
+                <p>{{ form.body.label }}</p>
+                {{ form.body(class="formbody") }}
+                 
+                {% for error in form.body.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+
+            </div>
+            
+            
+            {{ form.happiness_level.label }}
+            {{ form.happiness_level(class="formselect") }}<br>
+            
+            {{ form.tag}}
+
+            {{ form.submit(class="button") }}
+        </form>
+    {% endif %}
+
+
+  {% endblock %}
